@@ -38,11 +38,12 @@ section {
 
 ul {
   list-style: none;
-  width: 100%;
   padding: 0;
   margin: 0;
 }
-
+.chats {
+  width: 100%;
+}
 li {
   position: relative;
 }
@@ -220,4 +221,83 @@ nav {
 }
 .search {
   padding: 0 1rem;
+}
+.overlay {
+  padding: 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(2px);
+  z-index: 20000;
+  display: none;
+}
+
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes scale {
+  0% {
+    transform: scale(0.4);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.overlay-visible {
+  display: block;
+  animation: 200ms opacity;
+  opacity: 1;
+}
+
+.overlay-content {
+  animation: 200ms scale;
+}
+
+.chat-preview {
+  background: #18222e;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.chat-preview-title {
+  font-weight: 500;
+  font-size: 16px;
+}
+.chat-preview-content {
+  height: 300px;
+}
+.chat-preview-header {
+  padding: 5px 0;
+  background: #213040;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.overlay-actions {
+  background: #1f2b38;
+  border-radius: 15px;
+  width: 240px;
+  margin-top: 0.8rem;
+}
+
+.overlay-actions li {
+  padding: 0.8rem 1.5rem;
+  font-weight: 400;
+  border-bottom: 1px solid #2a3643;
+  font-size: 14px;
+}
+.overlay-actions li:last-child {
+  border-bottom: 0;
+}
+.chat-preview-members {
+  color: #6f7b86;
 }

@@ -10,9 +10,9 @@ function debounce<T extends Function>(cb: T, wait = 20) {
 }
 
 function init() {
-  const li = document.querySelector("li")!;
+  const li = document.querySelector(".chats li")!;
+  const ul = document.querySelector(".chats")!;
 
-  const ul = document.querySelector("ul")!;
   for (let i = 0; i < 20; i++) {
     const clone = li.cloneNode(true) as HTMLLIElement;
     clone.setAttribute("id", (i + 1).toString());
@@ -21,13 +21,22 @@ function init() {
       .setAttribute("src", `https://i.pravatar.cc/200?${i}`);
     ul.appendChild(clone);
   }
-  const items = document.querySelectorAll("li");
+  const items = document.querySelectorAll(".chats li");
 
   let open: Element | null = null;
   let isAutoClosed: Element[] = [];
 
+  const $overlay = document.querySelector("#overlay")!;
+
+  $overlay.addEventListener("touchstart", (e) => {
+    if (e.target === $overlay) {
+      $overlay.classList.remove("overlay-visible");
+    }
+  });
+
   items.forEach((el) => {
     const $leftActions = el.querySelector<HTMLDivElement>(".actions-left")!;
+
     const $rightActions = el.querySelector<HTMLDivElement>(".actions-right")!;
     const $content = el.querySelector<HTMLDivElement>(".content")!;
     const leftBuff = el.querySelector<HTMLDivElement>(".buff-left")!;
@@ -44,6 +53,7 @@ function init() {
     $slider.addEventListener("touchstart", () => {
       timeout = setTimeout(() => {
         $slider.classList.add("touch");
+        document.querySelector("#overlay")!.classList.add("overlay-visible");
       }, 100);
     });
     $slider.addEventListener("touchend", () => {
