@@ -1,0 +1,8 @@
+{
+  "short_name": "Rare PWA Demo",
+  "name": "",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "blue",
+  "background_color": "blue"
+}

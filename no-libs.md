@@ -1,0 +1,3 @@
+- How to implement multiple views / separate markup of different concepts
+- Safari remote debugging still doesn't exists - usb-cable needed very quickly
+- https://stackoverflow.com/questions/6063308/touch-css-pseudo-class-or-something-similar css interaktiot
