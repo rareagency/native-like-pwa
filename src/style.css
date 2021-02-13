@@ -1,11 +1,15 @@
+::-webkit-scrollbar {
+  display: none;
+}
 html,
 body {
   margin: 0;
   height: 100%;
-  background: #000;
-  font: 14px/18px "Open Sans", "Lucida Grande", "Lucida Sans Unicode", Arial,
-    Helvetica, Verdana, sans-serif;
+  background: #213040;
+  font: 13px/18px -apple-system, "Helvetica Neue", "Lucida Grande",
+    "Lucida Sans Unicode", Arial, Helvetica, Verdana, sans-serif;
   color: #fff;
+  text-rendering: geometricPrecision;
 }
 
 body {
@@ -14,6 +18,7 @@ body {
   -webkit-user-select: none;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
+  background: #213040;
 }
 
 body {
@@ -23,19 +28,27 @@ body {
   flex-direction: column;
 }
 
+section {
+  flex-grow: 1;
+  overflow: auto;
+  position: relative;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
 ul {
   list-style: none;
   width: 100%;
   padding: 0;
+  margin: 0;
 }
 
 li {
   position: relative;
-  border-bottom: 1px solid #202b36;
 }
 
 .actions {
-  background: #1a2530;
+  background: hsl(210, 30%, 13%);
   position: absolute;
   z-index: 0;
   width: 100%;
@@ -62,12 +75,13 @@ actions-right {
   display: flex;
 }
 .content-inner {
-  background: #1a2530;
+  background: hsl(210, 30%, 13%);
   padding: 0.5rem;
   position: relative;
   width: 100%;
   scroll-snap-align: start;
   display: flex;
+  scroll-snap-stop: always;
 }
 
 .buff-left,
@@ -91,6 +105,11 @@ actions-right {
 
 .title {
   font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+.message {
+  color: #6f7b86;
 }
 
 .channel {
@@ -98,9 +117,13 @@ actions-right {
   justify-content: center;
   height: 100%;
   flex-direction: column;
+  border-bottom: 1px solid #2b3a49;
+  flex-grow: 1;
+  padding-bottom: 6px;
 }
 
 button {
+  min-width: 6rem;
   border: 0;
   background: 0;
   height: 100%;
@@ -111,6 +134,17 @@ button {
   font-weight: bold;
   padding: 0 1rem;
 }
+
+button:first-child {
+  z-index: 5;
+}
+button:last-child {
+  z-index: 1;
+}
+
+.actions-left button {
+}
+
 .unread {
   background: #30a6fd;
 }
@@ -119,4 +153,51 @@ button {
 }
 .delete {
   background: red;
+}
+
+header {
+  width: 100%;
+  padding: 1rem;
+  padding-bottom: 1.5rem;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+input {
+  background: #192530;
+  height: 35px;
+  border-radius: 10px;
+  border: 0;
+  margin: 3px auto;
+  width: 100%;
+  display: block;
+  padding: 0 1rem;
+}
+
+input::placeholder {
+  font-family: inherit;
+  font-size: 17px;
+  text-align: center;
+  color: #88929b;
+}
+
+nav .item {
+  color: #36a2d6;
+  font-weight: 500;
+  padding: 0.8rem 1px;
+  display: inline-block;
+  border-bottom: 3px solid #36a2d6;
+  font-size: 14px;
+}
+nav {
+  padding: 0 1.3rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #213040;
+  border-bottom: 1px solid #2b3a49;
+}
+.search {
+  padding: 0 1rem;
 }

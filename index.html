@@ -3,7 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="manifest" href="/app.manifest" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
     <link rel="icon" type="image/svg+xml" href="src/favicon.svg" />
+    <script
+      defer
+      src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"
+    ></script>
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0,
@@ -13,44 +21,45 @@
     <script type="module" src="/src/my-element.ts"></script>
   </head>
   <body ontouchstart="">
-    <ul>
-      <li>
-        <div class="actions">
-          <div class="actions-left">
-            <button class="unread">Unread</button>
-            <button class="pin">Pin</button>
-          </div>
-          <div class="actions-right">
-            <button class="delete">Delete</button>
-          </div>
-        </div>
-        <div class="content-container">
-          <div class="content">
-            <div class="buff-left"></div>
-            <div class="content-inner">
-              <div>
-                <img src="https://i.pravatar.cc/200?1" class="avatar" />
-              </div>
-              <div class="channel">
-                <div class="title">RARE 🚀</div>
-                <div>You</div>
-                <div>tää on aika smooth</div>
-              </div>
+    <header>Chats</header>
+    <section>
+      <div class="search">
+        <input type="text" placeholder="🔍 Search for messages or users" />
+      </div>
+      <nav>
+        <div class="item">All Chats</div>
+      </nav>
+      <ul>
+        <li id="0">
+          <div class="actions">
+            <div class="actions-left">
+              <button class="unread">Unread</button>
+              <button class="pin">Pin</button>
             </div>
-            <div class="buff-right"></div>
+            <div class="actions-right">
+              <button class="delete">Delete</button>
+            </div>
           </div>
-        </div>
-      </li>
-    </ul>
-
-    <!-- <div id="video-container">
-      <video playsinline autoplay></video>
-    </div>
-    <div id="controls">
-      <div class="button"></div>
-    </div>
-    <canvas></canvas>
-    <div id="debug">moro</div>
-    -->
+          <div class="content-container">
+            <div class="content">
+              <div class="buff-left"></div>
+              <div class="content-inner">
+                <div>
+                  <img src="https://i.pravatar.cc/200?1" class="avatar" />
+                </div>
+                <div class="channel">
+                  <div class="title">Riku 🚀</div>
+                  <div>You</div>
+                  <div class="message">
+                    veikkaan, että tosi iso iso sellasesta "native-fe...
+                  </div>
+                </div>
+              </div>
+              <div class="buff-right"></div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </section>
   </body>
 </html>
