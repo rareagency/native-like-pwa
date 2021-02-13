@@ -68,6 +68,22 @@ actions-right {
   scroll-snap-type: x mandatory;
 }
 
+.content-inner.touch {
+  background: #000;
+}
+
+.content-inner.touch .content-wrapper {
+  transform: scale(0.9, 0.9);
+}
+
+.sliding .content-inner.touch {
+  background: hsl(210, 30%, 13%);
+}
+
+.sliding .content-inner.touch .content-wrapper {
+  transform: scale(1, 1);
+}
+
 .content {
   z-index: 2;
   position: relative;
@@ -80,8 +96,12 @@ actions-right {
   position: relative;
   width: 100%;
   scroll-snap-align: start;
-  display: flex;
   scroll-snap-stop: always;
+}
+
+.content-inner .content-wrapper {
+  display: flex;
+  transition: transform 200ms;
 }
 
 .buff-left,

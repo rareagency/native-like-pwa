@@ -32,7 +32,7 @@ function init() {
     const $content = el.querySelector<HTMLDivElement>(".content")!;
     const leftBuff = el.querySelector<HTMLDivElement>(".buff-left")!;
     const rightBuff = el.querySelector<HTMLDivElement>(".buff-right")!;
-    const slider = el.querySelector<HTMLDivElement>(".content-inner")!;
+    const $slider = el.querySelector<HTMLDivElement>(".content-inner")!;
     const $container = el.querySelector(".content-container")!;
 
     const actionsLeftWidth = $leftActions.getBoundingClientRect().width;
@@ -40,10 +40,21 @@ function init() {
 
     const actionsTotalWidth = actionsLeftWidth + actionsRightWidth;
 
+    let timeout: number;
+    $slider.addEventListener("touchstart", () => {
+      timeout = setTimeout(() => {
+        $slider.classList.add("touch");
+      }, 100);
+    });
+    $slider.addEventListener("touchend", () => {
+      clearTimeout(timeout);
+      $slider.classList.remove("touch");
+    });
+
     $content.style.width = `calc(100% + ${actionsTotalWidth}px)`;
     leftBuff.style.width = `${actionsLeftWidth}px`;
     rightBuff.style.width = `${actionsRightWidth}px`;
-    slider.style.width = `calc(100% - ${actionsTotalWidth}px)`;
+    $slider.style.width = `calc(100% - ${actionsTotalWidth}px)`;
 
     const centerScrollPosition = actionsLeftWidth;
 
@@ -59,6 +70,7 @@ function init() {
         $rightActions
           .querySelectorAll("button")
           .forEach((el) => (el.style.transform = ""));
+        $container.classList.remove("sliding");
       }
 
       if (centered && open === $container) {
@@ -92,6 +104,7 @@ function init() {
           });
         }
         open = $container;
+        open.classList.add("sliding");
       }
 
       if (diff > 0) {
