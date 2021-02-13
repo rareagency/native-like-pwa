@@ -54,7 +54,7 @@ function init() {
       timeout = setTimeout(() => {
         $slider.classList.add("touch");
         document.querySelector("#overlay")!.classList.add("overlay-visible");
-      }, 100);
+      }, 200);
     });
     $slider.addEventListener("touchend", () => {
       clearTimeout(timeout);
