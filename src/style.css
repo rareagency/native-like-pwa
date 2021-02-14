@@ -43,11 +43,22 @@ ul {
   margin: 0;
 }
 .chats {
+  transform: translateY(-76px);
   overflow: hidden;
   width: 100%;
+  transition: none;
 }
+.all-visible {
+  transform: translateY(0);
+  transition: transform 300ms;
+}
+
 li {
   position: relative;
+}
+
+.chats li {
+  height: 76px;
 }
 
 .actions {
@@ -228,7 +239,11 @@ nav {
   border-bottom: 1px solid #2b3a49;
 }
 .search {
-  padding: 0 1rem;
+  padding: 3px 1rem;
+  background: #213040;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 0;
 }
 .overlay {
   padding: 1rem 0.5rem;

@@ -10,32 +10,9 @@ function debounce<T extends Function>(cb: T, wait = 20) {
   return <T>(<any>callable);
 }
 
-function initializeSlider(el: HTMLLIElement) {
-  const $leftActions = el.querySelector<HTMLDivElement>(".actions-left")!;
-  const $rightActions = el.querySelector<HTMLDivElement>(".actions-right")!;
-  const $content = el.querySelector<HTMLDivElement>(".content")!;
-  const leftBuff = el.querySelector<HTMLDivElement>(".buff-left")!;
-  const rightBuff = el.querySelector<HTMLDivElement>(".buff-right")!;
-  const $slider = el.querySelector<HTMLDivElement>(".content-inner")!;
-  const $container = el.querySelector(".content-container")!;
-
-  const actionsLeftWidth = $leftActions.getBoundingClientRect().width;
-  const actionsRightWidth = $rightActions.getBoundingClientRect().width;
-
-  const actionsTotalWidth = actionsLeftWidth + actionsRightWidth;
-
-  $content.style.width = `calc(100% + ${actionsTotalWidth}px)`;
-  leftBuff.style.width = `${actionsLeftWidth}px`;
-  rightBuff.style.width = `${actionsRightWidth}px`;
-  $slider.style.width = `calc(100% - ${actionsTotalWidth}px)`;
-
-  const centerScrollPosition = actionsLeftWidth;
-  $container.scrollLeft = centerScrollPosition;
-}
-
 function init() {
-  const li = document.querySelector(".chats li")!;
-  const ul = document.querySelector(".chats")!;
+  const li = document.querySelector(".chats li:last-child")!;
+  const ul = document.querySelector<HTMLUListElement>(".chats")!;
 
   for (let i = 0; i < 20; i++) {
     const clone = li.cloneNode(true) as HTMLLIElement;
@@ -89,25 +66,19 @@ function init() {
    */
 
   const $chatList = document.querySelector("#scroller")!;
-  let archivedVisible: HTMLLIElement | null = null;
+  let archivedVisible: boolean = false;
 
-  function onStretch() {
-    archivedVisible = li.cloneNode(true) as HTMLLIElement;
-    ul.insertBefore(archivedVisible, ul.firstChild);
-    initializeSlider(archivedVisible);
-    archivedVisible.classList.add("item-appear");
-  }
-
-  $chatList.addEventListener("scroll", (e) => {
+  $chatList.addEventListener("scroll", () => {
     if (!archivedVisible && $chatList.scrollTop < -75) {
-      onStretch();
+      archivedVisible = true;
+      ul.classList.add("all-visible");
     }
 
-    if (archivedVisible && $chatList.scrollTop > 113) {
-      const height = archivedVisible.getBoundingClientRect().height;
-      ul.removeChild(archivedVisible);
-      $chatList.scrollTop = $chatList.scrollTop - height;
-      archivedVisible = null;
+    if (archivedVisible && $chatList.scrollTop > 118) {
+      archivedVisible = false;
+      ul.classList.remove("all-visible");
+
+      $chatList.scrollTop = 46;
     }
   });
 
