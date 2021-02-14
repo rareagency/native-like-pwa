@@ -77,12 +77,14 @@ function init() {
 
     const actionsTotalWidth = actionsLeftWidth + actionsRightWidth;
 
+    /*
+     * Open overlay
+     */
     let timer: number;
     $slider.addEventListener("long-press", (event) => {
       event.preventDefault();
 
       $overlay.classList.add("overlay-showing");
-
       setTimeout(() => $overlay.classList.add("overlay-visible"), 1);
       setTimeout(() => $overlay.classList.remove("overlay-showing"), 3);
       clearTimeout(timer);

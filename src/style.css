@@ -26,6 +26,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: fixed;
 }
 
 section {
@@ -70,7 +71,7 @@ actions-right {
 }
 
 .content-inner.touch {
-  background: #000;
+  background: #101820;
 }
 
 .content-inner.touch .content-wrapper {
@@ -315,4 +316,8 @@ nav {
 }
 .chat-preview-members {
   color: #6f7b86;
+}
+
+.no-scroll {
+  overflow: hidden;
 }
