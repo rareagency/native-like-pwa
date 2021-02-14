@@ -229,7 +229,7 @@ nav {
   padding: 0 1rem;
 }
 .overlay {
-  padding: 1rem;
+  padding: 1rem 0.5rem;
   position: fixed;
   top: 0;
   left: 0;
@@ -240,14 +240,16 @@ nav {
   z-index: 20000;
   display: none;
   transition: opacity 200ms;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .overlay-hiding {
-  display: block;
+  display: flex;
   opacity: 0;
 }
 .overlay-showing {
-  display: block;
+  display: flex;
   opacity: 0;
 }
 
@@ -260,7 +262,7 @@ nav {
   }
 }
 .overlay-visible {
-  display: block;
+  display: flex;
   animation: 200ms opacity;
   opacity: 1;
 }

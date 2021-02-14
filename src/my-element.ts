@@ -31,25 +31,33 @@ function init() {
    * Close overlay
    */
   const $overlay = document.querySelector("#overlay")!;
-  const $overlayContent = document.querySelector(".overlay-content")!;
+  const $chatPreview = document.querySelector(".chat-preview")!;
+  const $overlayActions = document.querySelector(".overlay-actions")!;
 
-  [$overlayContent, $overlay].forEach((el) => {
-    let timer: number;
-    el.addEventListener("touchstart", (e) => {
-      timer = setTimeout(() => {
-        if (e.target === el) {
-          e.stopPropagation();
-          $overlay.classList.remove("overlay-visible");
-          $overlay.classList.add("overlay-hiding");
+  let moved = false;
+  $overlay.addEventListener("touchstart", () => {
+    moved = false;
+  });
 
-          setTimeout(() => {
-            $overlay.classList.remove("overlay-hiding");
-          }, 200);
-        }
-      }, 200);
-    });
-    el.addEventListener("touchmove", () => {
-      clearTimeout(timer);
+  $overlay.addEventListener("touchmove", () => {
+    moved = true;
+  });
+
+  $overlay.addEventListener("touchend", () => {
+    if (moved) {
+      return;
+    }
+
+    $overlay.classList.remove("overlay-visible");
+    $overlay.classList.add("overlay-hiding");
+
+    setTimeout(() => {
+      $overlay.classList.remove("overlay-hiding");
+    }, 200);
+  });
+  [$chatPreview, $overlayActions].forEach((el) => {
+    el.addEventListener("touchend", (e) => {
+      e.stopPropagation();
     });
   });
 
@@ -108,12 +116,6 @@ function init() {
       const centered = Math.abs(target.scrollLeft - centerScrollPosition) < 2;
 
       if (centered) {
-        // $leftActions
-        //   .querySelectorAll("button")
-        //   .forEach((el) => (el.style.transform = ""));
-        // $rightActions
-        //   .querySelectorAll("button")
-        //   .forEach((el) => (el.style.transform = ""));
         $container.classList.remove("sliding");
       }
 

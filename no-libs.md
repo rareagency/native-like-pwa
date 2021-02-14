@@ -4,3 +4,9 @@
 - `scroll-snap-stop` would be very useful, but not supported anywhere atm
 
 https://stackoverflow.com/a/58258980/2560802
+
+- In some cases user intention is quite difficult (long press or scroll or swipe?)
+
+### Known issues
+
+- `long-press` event activates on app drawer swipe
