@@ -74,7 +74,7 @@ actions-right {
 }
 
 .content-inner.touch .content-wrapper {
-  transform: scale(0.9, 0.9);
+  transform: scale(0.95, 0.95);
 }
 
 .sliding .content-inner.touch {
@@ -233,6 +233,16 @@ nav {
   backdrop-filter: blur(2px);
   z-index: 20000;
   display: none;
+  transition: opacity 200ms;
+}
+
+.overlay-hiding {
+  display: block;
+  opacity: 0;
+}
+.overlay-showing {
+  display: block;
+  opacity: 0;
 }
 
 @keyframes opacity {
@@ -243,23 +253,20 @@ nav {
     opacity: 1;
   }
 }
-@keyframes scale {
-  0% {
-    transform: scale(0.4, 0.4);
-  }
-  100% {
-    transform: scale(1, 1);
-  }
-}
-
 .overlay-visible {
   display: block;
   animation: 200ms opacity;
   opacity: 1;
 }
 
+.overlay-content {
+  transform: scale(0, 0);
+  transition: transform 300ms;
+}
+
 .overlay-visible .overlay-content {
-  animation: 300ms scale;
+  transition: transform 300ms;
+  transform: scale(1, 1);
 }
 
 .chat-preview {

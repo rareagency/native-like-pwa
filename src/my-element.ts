@@ -1,4 +1,5 @@
 import "./style.css";
+import "./long-press";
 
 function debounce<T extends Function>(cb: T, wait = 20) {
   let h = 0;
@@ -26,12 +27,30 @@ function init() {
   let open: Element | null = null;
   let isAutoClosed: Element[] = [];
 
+  /*
+   * Close overlay
+   */
   const $overlay = document.querySelector("#overlay")!;
+  const $overlayContent = document.querySelector(".overlay-content")!;
 
-  $overlay.addEventListener("touchstart", (e) => {
-    if (e.target === $overlay) {
-      $overlay.classList.remove("overlay-visible");
-    }
+  [$overlayContent, $overlay].forEach((el) => {
+    let timer: number;
+    el.addEventListener("touchstart", (e) => {
+      timer = setTimeout(() => {
+        if (e.target === el) {
+          e.stopPropagation();
+          $overlay.classList.remove("overlay-visible");
+          $overlay.classList.add("overlay-hiding");
+
+          setTimeout(() => {
+            $overlay.classList.remove("overlay-hiding");
+          }, 200);
+        }
+      }, 200);
+    });
+    el.addEventListener("touchmove", () => {
+      clearTimeout(timer);
+    });
   });
 
   items.forEach((el) => {
@@ -49,15 +68,29 @@ function init() {
 
     const actionsTotalWidth = actionsLeftWidth + actionsRightWidth;
 
-    let timeout: number;
+    let timer: number;
+    $slider.addEventListener("long-press", (event) => {
+      event.preventDefault();
+
+      $overlay.classList.add("overlay-showing");
+
+      setTimeout(() => $overlay.classList.add("overlay-visible"), 1);
+      setTimeout(() => $overlay.classList.remove("overlay-showing"), 3);
+      clearTimeout(timer);
+      $slider.classList.remove("touch");
+    });
+
     $slider.addEventListener("touchstart", () => {
-      timeout = setTimeout(() => {
+      timer = setTimeout(() => {
         $slider.classList.add("touch");
-        document.querySelector("#overlay")!.classList.add("overlay-visible");
       }, 200);
     });
+    $slider.addEventListener("touchmove", (e) => {
+      clearTimeout(timer);
+      $slider.classList.remove("touch");
+    });
     $slider.addEventListener("touchend", () => {
-      clearTimeout(timeout);
+      clearTimeout(timer);
       $slider.classList.remove("touch");
     });
 
