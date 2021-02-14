@@ -144,7 +144,6 @@ actions-right {
 }
 
 button {
-  min-width: 6rem;
   border: 0;
   background: 0;
   height: 100%;
@@ -153,7 +152,13 @@ button {
   margin: 0;
   display: block;
   font-weight: bold;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.button-content {
   padding: 0 1rem;
+  min-width: 6rem;
 }
 
 button:first-child {
@@ -163,7 +168,8 @@ button:last-child {
   z-index: 1;
 }
 
-.actions-left button {
+.actions-right button {
+  justify-content: flex-start;
 }
 
 .unread {

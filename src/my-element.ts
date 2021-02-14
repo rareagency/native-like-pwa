@@ -54,6 +54,7 @@ function init() {
   });
 
   items.forEach((el) => {
+    const $actions = el.querySelector<HTMLDivElement>(".actions")!;
     const $leftActions = el.querySelector<HTMLDivElement>(".actions-left")!;
 
     const $rightActions = el.querySelector<HTMLDivElement>(".actions-right")!;
@@ -94,15 +95,6 @@ function init() {
       $slider.classList.remove("touch");
     });
 
-    console.log({
-      bod: window
-        .getComputedStyle(window.document.body)
-        .getPropertyValue("background-color"),
-      actionsLeftWidth,
-      actionsRightWidth,
-      actionsTotalWidth,
-    });
-
     $content.style.width = `calc(100% + ${actionsTotalWidth}px)`;
     leftBuff.style.width = `${actionsLeftWidth}px`;
     rightBuff.style.width = `${actionsRightWidth}px`;
@@ -116,12 +108,12 @@ function init() {
       const centered = Math.abs(target.scrollLeft - centerScrollPosition) < 2;
 
       if (centered) {
-        $leftActions
-          .querySelectorAll("button")
-          .forEach((el) => (el.style.transform = ""));
-        $rightActions
-          .querySelectorAll("button")
-          .forEach((el) => (el.style.transform = ""));
+        // $leftActions
+        //   .querySelectorAll("button")
+        //   .forEach((el) => (el.style.transform = ""));
+        // $rightActions
+        //   .querySelectorAll("button")
+        //   .forEach((el) => (el.style.transform = ""));
         $container.classList.remove("sliding");
       }
 
@@ -136,6 +128,17 @@ function init() {
         }
       }
     }, 30);
+
+    /*
+     * Initialize buttons
+     */
+
+    $actions.querySelectorAll("button").forEach((el) => {
+      el.style.position = "absolute";
+      el.style.left = "0";
+      el.style.top = "0";
+      el.style.width = `${$slider.getBoundingClientRect().width}px`;
+    });
 
     el.querySelector(".content-container")!.addEventListener("scroll", (e) => {
       const target = e.target as HTMLDivElement;
@@ -159,22 +162,19 @@ function init() {
         open.classList.add("sliding");
       }
 
-      if (diff > 0) {
-        const percentageOpen = diff / actionsLeftWidth;
-
-        $leftActions.querySelectorAll("button").forEach((el, i) => {
-          el.style.transform = `translateX(${
-            -100 * (i + 1) * (1 - percentageOpen)
-          }%)`;
+      if (diff != 0) {
+        const buttonsL = Array.from($leftActions.querySelectorAll("button"));
+        buttonsL.forEach((el, i) => {
+          el.style.transform = `translateX(calc(-100% + ${
+            (diff / buttonsL.length) * (i + 1)
+          }px))`;
         });
-      }
-      if (diff < 0) {
-        const percentageOpen = (diff / actionsRightWidth) * -1;
 
-        $rightActions.querySelectorAll("button").forEach((el, i) => {
-          el.style.transform = `translateX(${
-            100 * (i + 1) * (1 - percentageOpen)
-          }%)`;
+        const buttonsR = Array.from($rightActions.querySelectorAll("button"));
+        buttonsR.forEach((el, i) => {
+          el.style.transform = `translateX(calc(100% - ${
+            (diff / buttonsR.length) * (i + 1) * -1
+          }px))`;
         });
       }
     });
