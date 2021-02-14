@@ -19,7 +19,7 @@ function init() {
     clone.setAttribute("id", (i + 1).toString());
     clone
       .querySelector<HTMLImageElement>("img")!
-      .setAttribute("src", `https://i.pravatar.cc/200?${i}`);
+      .setAttribute("src", `https://i.pravatar.cc/110?${i % 4}`);
     ul.appendChild(clone);
   }
   const items = document.querySelectorAll(".chats li");
@@ -85,13 +85,22 @@ function init() {
         $slider.classList.add("touch");
       }, 200);
     });
-    $slider.addEventListener("touchmove", (e) => {
+    $slider.addEventListener("touchmove", () => {
       clearTimeout(timer);
       $slider.classList.remove("touch");
     });
     $slider.addEventListener("touchend", () => {
       clearTimeout(timer);
       $slider.classList.remove("touch");
+    });
+
+    console.log({
+      bod: window
+        .getComputedStyle(window.document.body)
+        .getPropertyValue("background-color"),
+      actionsLeftWidth,
+      actionsRightWidth,
+      actionsTotalWidth,
     });
 
     $content.style.width = `calc(100% + ${actionsTotalWidth}px)`;
@@ -172,4 +181,4 @@ function init() {
   });
 }
 
-init();
+window.addEventListener("load", init);
