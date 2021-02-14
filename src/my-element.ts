@@ -10,6 +10,29 @@ function debounce<T extends Function>(cb: T, wait = 20) {
   return <T>(<any>callable);
 }
 
+function initializeSlider(el: HTMLLIElement) {
+  const $leftActions = el.querySelector<HTMLDivElement>(".actions-left")!;
+  const $rightActions = el.querySelector<HTMLDivElement>(".actions-right")!;
+  const $content = el.querySelector<HTMLDivElement>(".content")!;
+  const leftBuff = el.querySelector<HTMLDivElement>(".buff-left")!;
+  const rightBuff = el.querySelector<HTMLDivElement>(".buff-right")!;
+  const $slider = el.querySelector<HTMLDivElement>(".content-inner")!;
+  const $container = el.querySelector(".content-container")!;
+
+  const actionsLeftWidth = $leftActions.getBoundingClientRect().width;
+  const actionsRightWidth = $rightActions.getBoundingClientRect().width;
+
+  const actionsTotalWidth = actionsLeftWidth + actionsRightWidth;
+
+  $content.style.width = `calc(100% + ${actionsTotalWidth}px)`;
+  leftBuff.style.width = `${actionsLeftWidth}px`;
+  rightBuff.style.width = `${actionsRightWidth}px`;
+  $slider.style.width = `calc(100% - ${actionsTotalWidth}px)`;
+
+  const centerScrollPosition = actionsLeftWidth;
+  $container.scrollLeft = centerScrollPosition;
+}
+
 function init() {
   const li = document.querySelector(".chats li")!;
   const ul = document.querySelector(".chats")!;
@@ -59,6 +82,32 @@ function init() {
     el.addEventListener("touchend", (e) => {
       e.stopPropagation();
     });
+  });
+
+  /*
+   * Show and hide archived messages
+   */
+
+  const $chatList = document.querySelector("#scroller")!;
+  let archivedVisible: HTMLLIElement | null = null;
+
+  function onStretch() {
+    archivedVisible = li.cloneNode(true) as HTMLLIElement;
+    ul.insertBefore(archivedVisible, ul.firstChild);
+    initializeSlider(archivedVisible);
+    archivedVisible.classList.add("item-appear");
+  }
+
+  $chatList.addEventListener("scroll", (e) => {
+    if (!archivedVisible && $chatList.scrollTop < -75) {
+      onStretch();
+    }
+
+    if (archivedVisible && $chatList.scrollTop > 113) {
+      ul.removeChild(archivedVisible);
+      $chatList.scrollTop = 0;
+      archivedVisible = null;
+    }
   });
 
   items.forEach((el) => {

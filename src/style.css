@@ -43,6 +43,7 @@ ul {
   margin: 0;
 }
 .chats {
+  overflow: hidden;
   width: 100%;
 }
 li {
@@ -320,4 +321,17 @@ nav {
 
 .no-scroll {
   overflow: hidden;
+}
+
+@keyframes appear {
+  0% {
+    margin-top: -76px;
+  }
+  100% {
+    margin-top: 0;
+  }
+}
+
+.item-appear {
+  animation: 0.3s appear;
 }
