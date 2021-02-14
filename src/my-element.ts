@@ -104,8 +104,9 @@ function init() {
     }
 
     if (archivedVisible && $chatList.scrollTop > 113) {
+      const height = archivedVisible.getBoundingClientRect().height;
       ul.removeChild(archivedVisible);
-      $chatList.scrollTop = 0;
+      $chatList.scrollTop = $chatList.scrollTop - height;
       archivedVisible = null;
     }
   });
