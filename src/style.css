@@ -35,6 +35,7 @@ section {
   position: relative;
   width: 100vw;
   overflow-x: hidden;
+  background: hsl(210, 30%, 13%);
 }
 
 ul {
