@@ -34,8 +34,8 @@ section {
   overflow: auto;
   position: relative;
   width: 100vw;
+  background: linear-gradient(180deg, #213040 50%, hsl(210, 30%, 13%) 50%);
   overflow-x: hidden;
-  background: hsl(210, 30%, 13%);
 }
 
 ul {
@@ -350,4 +350,12 @@ nav {
 
 .item-appear {
   animation: 0.3s appear;
+}
+.top-bg {
+  position: fixed;
+  top: 0;
+  height: 20vh;
+  width: 100vw;
+  background: #213040;
+  z-index: 1;
 }
