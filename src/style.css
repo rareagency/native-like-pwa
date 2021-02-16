@@ -145,6 +145,10 @@ actions-right {
 }
 .message {
   color: #6f7b86;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
 }
 
 .channel {

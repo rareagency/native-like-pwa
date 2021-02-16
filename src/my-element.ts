@@ -23,8 +23,8 @@ function init() {
     clone.classList.remove('hidden');
     clone.setAttribute('id', (i + 1).toString());
     clone.querySelector<HTMLImageElement>('img')!.setAttribute('src', `https://i.pravatar.cc/110?${i % 4}`);
-    clone.querySelector<HTMLDivElement>('.message')!.innerHTML = textLimiter(msg.message, 50);
-    clone.querySelector<HTMLDivElement>('.title')!.innerHTML = textLimiter(msg.title, 35);
+    clone.querySelector<HTMLDivElement>('.message')!.innerHTML = textLimiter(msg.message, 45);
+    clone.querySelector<HTMLDivElement>('.title')!.innerHTML = textLimiter(msg.title, 30);
     ul.appendChild(clone);
   }
   const items = document.querySelectorAll('.chats li');
