@@ -10,6 +10,12 @@ function debounce<T extends Function>(cb: T, wait = 20) {
   return <T>(<any>callable);
 }
 
+function vibrate(...params: Parameters<typeof window.navigator.vibrate>) {
+  try {
+    window.navigator.vibrate(...params);
+  } catch (error) {}
+}
+
 function init() {
   const li = document.querySelector(".chats li:last-child")!;
   const ul = document.querySelector<HTMLUListElement>(".chats")!;
@@ -70,6 +76,7 @@ function init() {
 
   $chatList.addEventListener("scroll", () => {
     if (!archivedVisible && $chatList.scrollTop < -75) {
+      vibrate(5);
       archivedVisible = true;
       ul.classList.add("all-visible");
     }
