@@ -1,7 +1,7 @@
 import './style.css';
 import './long-press';
 import { randomMessage } from './data/messages';
-import { textLimiter } from './helpers';
+import { iOS, textLimiter } from './helpers';
 
 function debounce<T extends Function>(cb: T, wait = 20) {
   let h = 0;
@@ -69,23 +69,27 @@ function init() {
   /*
    * Show and hide archived messages
    */
-
   const $chatList = document.querySelector('#scroller')!;
-  let archivedVisible: boolean = false;
 
-  $chatList.addEventListener('scroll', () => {
-    if (!archivedVisible && $chatList.scrollTop < -75) {
-      archivedVisible = true;
-      ul.classList.add('all-visible');
-    }
+  if (iOS()) {
+    let archivedVisible: boolean = false;
+    $chatList.addEventListener('scroll', () => {
+      if (!archivedVisible && $chatList.scrollTop < -75) {
+        archivedVisible = true;
+        ul.classList.add('all-visible');
+      }
 
-    if (archivedVisible && $chatList.scrollTop > 118) {
-      archivedVisible = false;
-      ul.classList.remove('all-visible');
+      if (archivedVisible && $chatList.scrollTop > 118) {
+        archivedVisible = false;
+        ul.classList.remove('all-visible');
 
-      $chatList.scrollTop = 46;
-    }
-  });
+        $chatList.scrollTop = 46;
+      }
+    });
+  } else {
+    $chatList.scrollTop = 120;
+    ul.classList.add('all-visible');
+  }
 
   items.forEach((el) => {
     const $actions = el.querySelector<HTMLDivElement>('.actions')!;
