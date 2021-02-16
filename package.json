@@ -15,7 +15,6 @@
     "build": "tsc && vite build"
   },
   "dependencies": {
-    "lit-element": "^2.4.0",
     "vite-plugin-pwa": "^0.4.6"
   },
   "devDependencies": {

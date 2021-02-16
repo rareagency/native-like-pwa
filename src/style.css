@@ -6,8 +6,8 @@ body {
   margin: 0;
   height: 100%;
   background: #213040;
-  font: 13px/18px -apple-system, "Helvetica Neue", "Lucida Grande",
-    "Lucida Sans Unicode", Arial, Helvetica, Verdana, sans-serif;
+  font: 13px/18px -apple-system, 'Helvetica Neue', 'Lucida Grande', 'Lucida Sans Unicode', Arial, Helvetica, Verdana,
+    sans-serif;
   color: #fff;
   text-rendering: geometricPrecision;
 }
@@ -345,6 +345,9 @@ nav {
 
 .no-scroll {
   overflow: hidden;
+}
+.hidden {
+  display: none;
 }
 
 @keyframes appear {
