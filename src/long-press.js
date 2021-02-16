@@ -233,8 +233,13 @@
    * @returns {void}
    */
   function mouseDownHandler(e) {
-    startX = e.clientX;
-    startY = e.clientY;
+    if (mouseDown === "touchstart") {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+    } else {
+      startX = e.clientX;
+      startY = e.clientY;
+    }
     startLongPressTimer(e);
   }
 
@@ -245,8 +250,16 @@
    */
   function mouseMoveHandler(e) {
     // calculate total number of pixels the pointer has moved
-    var diffX = Math.abs(startX - e.clientX);
-    var diffY = Math.abs(startY - e.clientY);
+    var diffX;
+    var diffY;
+
+    if (mouseDown === "touchstart") {
+      diffX = Math.abs(startX - e.touches[0].clientX);
+      diffY = Math.abs(startY - e.touches[0].clientY);
+    } else {
+      diffX = Math.abs(startX - e.clientX);
+      diffY = Math.abs(startY - e.clientY);
+    }
 
     // if pointer has moved more than allowed, cancel the long-press timer and therefore the event
     if (diffX >= maxDiffX || diffY >= maxDiffY) {

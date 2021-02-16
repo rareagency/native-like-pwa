@@ -34,6 +34,7 @@ section {
   overflow: auto;
   position: relative;
   width: 100vw;
+  background: linear-gradient(180deg, #213040 50%, hsl(210, 30%, 13%) 50%);
   overflow-x: hidden;
 }
 
@@ -164,14 +165,22 @@ button {
   font: inherit;
   margin: 0;
   display: block;
-  font-weight: bold;
+  font-weight: 500;
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
 .button-content {
-  padding: 0 1rem;
-  min-width: 6rem;
+  padding: 0 0.5rem;
+  min-width: 4rem;
+}
+
+button svg {
+  fill: #fff;
+  height: 30px;
+  display: block;
+  margin: auto;
+  margin-bottom: 8px;
 }
 
 button:first-child {
@@ -352,4 +361,12 @@ nav {
 
 .item-appear {
   animation: 0.3s appear;
+}
+.top-bg {
+  position: fixed;
+  top: 0;
+  height: 20vh;
+  width: 100vw;
+  background: #213040;
+  z-index: 1;
 }
