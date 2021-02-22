@@ -1,4 +1,13 @@
-import { randomNumber } from '../helpers';
+export interface MessageInterface {
+  user: string;
+  message: string;
+}
+
+export interface ThreadInterface {
+  title: string;
+  users: string[];
+  messages: MessageInterface[];
+}
 
 const messages = [
   'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,',
@@ -12,7 +21,7 @@ const messages = [
   'Reef sails strike colors code of conduct parley sloop yardarm square-rigged mizzen loaded to the gunwalls keel. Bilge rat scuttle gangway heave down piracy nipper pirate mizzen topmast deadlights. Aft case shot lugsail Gold Road scourge of the seven seas mutiny skysail reef bowsprit Admiral of the Black.',
 ];
 
-const titles = [
+const users = [
   'Riku 🚀',
   'Joel',
   'Bob Ross',
@@ -24,11 +33,15 @@ const titles = [
   'Dillon Casey',
 ];
 
-function randomMessage() {
-  return {
-    title: titles[randomNumber(0, titles.length)],
-    message: messages[randomNumber(0, messages.length)],
-  };
+let threads: ThreadInterface[] = [
+  { title: 'Random Chat #1', users: [], messages: [] },
+  { title: 'Cool Guys Group', users: [], messages: [] },
+  { title: 'Random Chat #2', users: [], messages: [] },
+  { title: 'RARE memes', users: [], messages: [] },
+];
+
+function setThreads(newThreads: ThreadInterface[]) {
+  threads = newThreads;
 }
 
-export { messages, titles, randomMessage };
+export { threads, setThreads, users, messages };

@@ -1,7 +1,7 @@
 import './style.css';
 import './long-press';
-import { randomMessage } from './data/messages';
-import { iOS, textLimiter } from './helpers';
+import { iOS } from './helpers';
+import { filterThreads, initThreads } from './threads';
 
 function debounce<T extends Function>(cb: T, wait = 20) {
   let h = 0;
@@ -19,20 +19,10 @@ function vibrate(...params: Parameters<typeof window.navigator.vibrate>) {
 }
 
 function init() {
-  const li = document.querySelector('.chats li:last-child')!;
   const ul = document.querySelector<HTMLUListElement>('.chats')!;
 
-  for (let i = 0; i < 20; i++) {
-    const clone = li.cloneNode(true) as HTMLLIElement;
-    const msg = randomMessage();
+  initThreads();
 
-    clone.classList.remove('hidden');
-    clone.setAttribute('id', (i + 1).toString());
-    clone.querySelector<HTMLImageElement>('img')!.setAttribute('src', `https://i.pravatar.cc/110?${i % 4}`);
-    clone.querySelector<HTMLDivElement>('.message')!.innerHTML = textLimiter(msg.message, 45);
-    clone.querySelector<HTMLDivElement>('.title')!.innerHTML = textLimiter(msg.title, 30);
-    ul.appendChild(clone);
-  }
   const items = document.querySelectorAll('.chats li');
 
   let open: Element | null = null;
@@ -219,3 +209,4 @@ function init() {
 }
 
 window.addEventListener('load', init);
+document.querySelector('#filterInput')!.addEventListener('change', filterThreads);

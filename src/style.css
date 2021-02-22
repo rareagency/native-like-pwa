@@ -36,12 +36,15 @@ section {
   width: 100vw;
   background: linear-gradient(180deg, #213040 50%, hsl(210, 30%, 13%) 50%);
   overflow-x: hidden;
+  min-height: 90vh;
 }
 
 ul {
   list-style: none;
   padding: 0;
   margin: 0;
+  min-height: 100vh;
+  background: #213040;
 }
 .chats {
   transform: translateY(-76px);
